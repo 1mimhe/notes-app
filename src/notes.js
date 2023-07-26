@@ -1,12 +1,13 @@
 const fs = require('fs');
+const chalk = require('chalk');
 
 const addNote = function (title, body) {
     const oldNotes = loadNotes();
     if (oldNotes.some((note) => note.title === title)) {
-        console.log('This title note already exists!');
+        console.log(chalk.black.bgRed('This title note already exists!'));
     } else {
         saveNotes([...oldNotes, {title, body, date: new Date().toUTCString()}]);
-        console.log('New note added!');
+        console.log(chalk.black.bgGreen('New note added!'));
     }
 };
 
@@ -15,20 +16,22 @@ const removeNote = function (title) {
     const newNotes = oldNotes.filter((note) => note.title !== title);
 
     if (oldNotes.length === newNotes.length) {
-        console.log('This title does not exist in the notes!');
+        console.log(chalk.black.bgRed('This title does not exist in the notes!'));
     } else {
         saveNotes(newNotes);
-        console.log(`Note '${title}' has been removed!`);
+        console.log(chalk.black.bgGreen(`Note '${title}' has been removed!`));
     }
 };
 
 const listNotes = function () {
     const notes = loadNotes();
-    if (notes.length) {
-        console.log('There is no note!');
+    if (!notes.length) {
+        console.log(chalk.black.bgRed('There is no note!'));
     } else {
-        console.log('Your Notes:');
-        notes.forEach((note, index) => console.log(index + 1, note.title));
+        console.log(chalk.inverse('Your Notes'));
+        notes.forEach((note, index) => {
+            console.log(chalk.blue.underline(index + 1), note.title, chalk.gray.bold(note.date));
+        });
     }
 }
 
@@ -37,10 +40,10 @@ const readNote = function (title) {
     const foundNote = notes.find((note) => note.title === title);
 
     if (foundNote) {
-        console.log(`-${foundNote.title}-`);
+        console.log(chalk.black.bgYellow(foundNote.title), chalk.gray(foundNote.date));
         console.log(foundNote.body);
     } else {
-        console.log(`Note ${title} not found!`);
+        console.log(chalk.black.bgRed(`Note ${title} not found!`));
     }
 }
 
