@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const addNotes = function (title, body) {
+const addNote = function (title, body) {
     let oldNotes = [];
     if (fs.existsSync('notes.json'))
         oldNotes =
@@ -9,5 +9,5 @@ const addNotes = function (title, body) {
 };
 
 module.exports = {
-    addNotes : addNotes
+    addNote : addNote
 };

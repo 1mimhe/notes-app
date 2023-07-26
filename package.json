@@ -10,6 +10,6 @@
   "author": "Mohammad Hosseini",
   "license": "ISC",
   "dependencies": {
-    "yargs": "^17.7.2"
+    "yargs": "^12.0.5"
   }
 }
