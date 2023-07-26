@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const addNote = function (title, body) {
-    const oldNotes = loadNotes() || [];
+    const oldNotes = loadNotes();
     if (oldNotes.some((note) => note.title === title)) {
         console.log('This title note already exists!');
     } else {
@@ -11,7 +11,7 @@ const addNote = function (title, body) {
 };
 
 const removeNote = function (title) {
-    const oldNotes = loadNotes() || [];
+    const oldNotes = loadNotes();
     const newNotes = oldNotes.filter((note) => note.title !== title);
 
     if (oldNotes.length === newNotes.length) {
@@ -21,6 +21,16 @@ const removeNote = function (title) {
         console.log(`Note '${title}' has been removed!`);
     }
 };
+
+const listNotes = function () {
+    const notes = loadNotes();
+    if (notes.length) {
+        console.log('There is no note!');
+    } else {
+        console.log('Your Notes:');
+        notes.forEach((note, index) => console.log(index + 1, note.title));
+    }
+}
 
 const loadNotes = function () {
     try {
@@ -36,5 +46,6 @@ const saveNotes = function (newNotes) {
 
 module.exports = {
     addNote: addNote,
-    removeNote: removeNote
+    removeNote: removeNote,
+    listNotes: listNotes
 };

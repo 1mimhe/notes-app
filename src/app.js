@@ -36,4 +36,12 @@ yargs.command({
     }
 });
 
+yargs.command({
+    command: 'list',
+    describe: 'List notes',
+    handler() {
+        notes.listNotes();
+    }
+});
+
 yargs.parse();
