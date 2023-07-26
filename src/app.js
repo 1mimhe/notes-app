@@ -11,7 +11,7 @@ yargs.command({
             type: 'string'
         },
         body: {
-            describe: 'Note title',
+            describe: 'Note body',
             demandOption: true,
             type: 'string'
         }
@@ -20,3 +20,5 @@ yargs.command({
        notes.addNote(argv.title, argv.body);
     }
 });
+
+yargs.parse();
