@@ -1,6 +1,8 @@
 const notes = require('./notes');
 const yargs = require('yargs');
 
+notes.updateTrash();
+
 yargs.command({
     command: 'add',
     describe: 'Add a new note',
@@ -23,16 +25,20 @@ yargs.command({
 
 yargs.command({
     command: 'remove',
-    describe: 'Remove a new note',
+    describe: 'Remove a note',
     builder: {
         title: {
             describe: 'Note title',
             demandOption: true,
             type: 'string'
+        },
+        permanently: {
+            describe: 'Remove permanently',
+            type: 'boolean'
         }
     },
     handler(argv) {
-        notes.removeNote(argv.title);
+        notes.removeNote(argv.title, argv.permanently);
     }
 });
 
@@ -56,6 +62,14 @@ yargs.command({
     },
     handler(argv) {
         notes.readNote(argv.title);
+    }
+});
+
+yargs.command({
+    command: 'trash',
+    describe: 'Trash notes',
+    handler() {
+        notes.trashList();
     }
 });
 
