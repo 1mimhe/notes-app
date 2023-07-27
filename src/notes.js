@@ -12,7 +12,6 @@ const addNote = function (title, body, date = new Date()) {
 };
 
 const removeNote = function (title, permanently = false) {
-    console.log(permanently)
     const oldNotes = loadNotes();
     const newNotes = oldNotes.filter((note) => note.title !== title);
     const removedNote = oldNotes.find((note) => note.title === title);
